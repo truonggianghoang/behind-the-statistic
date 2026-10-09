@@ -1,0 +1,177 @@
+// Version: 4.0.0
+type AccessControlState__201339279 =
+  {
+    var adminAssigned : Bool;
+    userRoles : Map__230067015<Principal, UserRole__91647283>
+  };
+type ArticleSection__1058585389 = {body : Text; heading : Text};
+type ArticleSection__843574470 = {body : Text; heading : Text};
+type Category__159931441 = {#mental; #physical};
+type Category__457257140 = Category__936342486;
+type Category__936342486 = {#mental; #physical};
+type ContactDetails__172412803 =
+  {
+    createdBy : Text;
+    email : Text;
+    location : Text;
+    organisation : Text;
+    project : Text
+  };
+type ContactDetails__790281168 =
+  {
+    createdBy : Text;
+    email : Text;
+    location : Text;
+    organisation : Text;
+    project : Text
+  };
+type ContactSubmission__207694890 =
+  {email : Text; id : Nat; message : Text; name : Text; submittedAt : Nat};
+type ContactSubmission__93684224 =
+  {
+    email : Text;
+    id : Nat;
+    message : Text;
+    name : Text;
+    submittedAt : Timestamp__306786231
+  };
+type Data__44217153<K, V> = {var count : Nat__227979830; kvs : [var ?(K, V)]};
+type FeaturedIssue__585725483 =
+  {
+    category : Category__159931441;
+    heroImage : Text;
+    slug : Text;
+    summary : Text;
+    title : Text
+  };
+type FeaturedIssue__633187001 =
+  {
+    category : Category__457257140;
+    heroImage : Text;
+    slug : Slug__867777616;
+    summary : Text;
+    title : Text
+  };
+type Internal__283199666<K, V> =
+  {children : [var ?Node__204828119<K, V>]; data : Data__44217153<K, V>};
+type Leaf__598469445<K, V> = {data : Data__44217153<K, V>};
+type Map__230067015<K, V> = Map__405889023<K, V>;
+type Map__405889023<K, V> = Map__603270868<K, V>;
+type Map__603270868<K, V> =
+  {var root : Node__204828119<K, V>; var size : Nat__227979830};
+type Nat__227979830 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewActor__769816496 =
+  {
+    accessControlState : AccessControlState__201339279;
+    contactState : {var nextId : Nat};
+    examples : Map__230067015<Nat, RealLifeExample__1069400093>;
+    featured : Map__230067015<Nat, FeaturedIssue__585725483>;
+    problems : Map__230067015<Nat, Problem__149151959>;
+    siteContent : SiteContent__51877940;
+    submissions : Map__230067015<Nat, ContactSubmission__207694890>
+  };
+type Node__204828119<K, V> =
+  {#internal : Internal__283199666<K, V>; #leaf : Leaf__598469445<K, V>};
+type OldActor__512397517 = {};
+type Problem__1008183970 =
+  {
+    category : Category__457257140;
+    heroImage : Text;
+    id : Nat;
+    sections : [ArticleSection__1058585389];
+    slug : Slug__867777616;
+    sources : [Source__871927490];
+    summary : Text;
+    title : Text
+  };
+type Problem__149151959 =
+  {
+    category : Category__159931441;
+    heroImage : Text;
+    id : Nat;
+    sections : [ArticleSection__843574470];
+    slug : Text;
+    sources : [Source__7573328];
+    summary : Text;
+    title : Text
+  };
+type RealLifeExample__1069400093 =
+  {
+    category : Category__159931441;
+    id : Nat;
+    impact : Text;
+    journey : Text;
+    person : Text;
+    problem : Text;
+    situation : Text;
+    source : Source__7573328
+  };
+type RealLifeExample__4574791 =
+  {
+    category : Category__457257140;
+    id : Nat;
+    impact : Text;
+    journey : Text;
+    person : Text;
+    problem : Text;
+    situation : Text;
+    source : Source__871927490
+  };
+type SiteContent__51877940 =
+  {
+    contactDetails : ContactDetails__172412803;
+    introduction : Text;
+    siteName : Text;
+    tagline : Text;
+    whyThisMatters : WhyThisMatters__647550980
+  };
+type Slug__239290498 = Text;
+type Slug__867777616 = Slug__239290498;
+type Source__697576408 = {organisation : Text; title : Text; url : Text};
+type Source__7573328 = {organisation : Text; title : Text; url : Text};
+type Source__871927490 = Source__697576408;
+type Timestamp__301639476 = Nat;
+type Timestamp__306786231 = Timestamp__301639476;
+type UserRole__91647283 = {#admin; #guest; #user};
+type WhyThisMatters__647550980 = {heading : Text; paragraphs : [Text]};
+type WhyThisMatters__946272695 = {heading : Text; paragraphs : [Text]};
+{
+  "00000000_000000" : (_old : OldActor__512397517) -> NewActor__769816496
+}
+actor  {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__230067015<Principal, UserRole__91647283>
+    };
+  stable contactState : {var nextId : Nat};
+  stable examples :
+    {
+      var root : Node__204828119<Nat, RealLifeExample__4574791>;
+      var size : Nat__227979830
+    };
+  stable featured :
+    {
+      var root : Node__204828119<Nat, FeaturedIssue__633187001>;
+      var size : Nat__227979830
+    };
+  stable problems :
+    {
+      var root : Node__204828119<Nat, Problem__1008183970>;
+      var size : Nat__227979830
+    };
+  stable siteContent :
+    {
+      contactDetails : ContactDetails__790281168;
+      introduction : Text;
+      siteName : Text;
+      tagline : Text;
+      whyThisMatters : WhyThisMatters__946272695
+    };
+  stable submissions :
+    {
+      var root : Node__204828119<Nat, ContactSubmission__93684224>;
+      var size : Nat__227979830
+    }
+};

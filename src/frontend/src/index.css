@@ -1,0 +1,252 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("/assets/fonts/Fraunces.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Figtree";
+  src: url("/assets/fonts/Figtree.woff2") format("woff2");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --font-display: "Fraunces";
+    --font-body: "Figtree";
+    --font-mono: "Geist Mono";
+    --radius: 0.75rem;
+
+    /* Warm cream base */
+    --background: 0.975 0.012 85;
+    --foreground: 0.235 0.028 65;
+
+    --card: 0.995 0.006 85;
+    --card-foreground: 0.235 0.028 65;
+    --popover: 0.995 0.006 85;
+    --popover-foreground: 0.235 0.028 65;
+
+    /* Deep teal — trust + calm */
+    --primary: 0.42 0.075 190;
+    --primary-foreground: 0.98 0.008 190;
+
+    --secondary: 0.945 0.018 85;
+    --secondary-foreground: 0.3 0.03 65;
+
+    --muted: 0.945 0.018 85;
+    --muted-foreground: 0.46 0.024 70;
+
+    /* Warm plum — empathy accent */
+    --accent: 0.5 0.115 345;
+    --accent-foreground: 0.98 0.008 345;
+
+    --destructive: 0.52 0.17 28;
+    --destructive-foreground: 0.98 0.008 28;
+
+    --success: 0.55 0.1 160;
+    --success-foreground: 0.98 0.008 160;
+    --warning: 0.72 0.13 80;
+    --warning-foreground: 0.24 0.03 80;
+
+    --border: 0.9 0.018 85;
+    --input: 0.9 0.018 85;
+    --ring: 0.5 0.115 345;
+
+    --chart-1: 0.42 0.075 190;
+    --chart-2: 0.5 0.115 345;
+    --chart-3: 0.62 0.09 160;
+    --chart-4: 0.72 0.13 80;
+    --chart-5: 0.55 0.1 30;
+
+    --sidebar: 0.955 0.016 85;
+    --sidebar-foreground: 0.235 0.028 65;
+    --sidebar-primary: 0.42 0.075 190;
+    --sidebar-primary-foreground: 0.98 0.008 190;
+    --sidebar-accent: 0.945 0.018 85;
+    --sidebar-accent-foreground: 0.3 0.03 65;
+    --sidebar-border: 0.9 0.018 85;
+    --sidebar-ring: 0.5 0.115 345;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.42 0.075 190),
+      oklch(0.36 0.07 200)
+    );
+    --gradient-warm: linear-gradient(
+      135deg,
+      oklch(0.975 0.012 85),
+      oklch(0.95 0.022 80)
+    );
+    --gradient-accent: linear-gradient(
+      135deg,
+      oklch(0.5 0.115 345),
+      oklch(0.44 0.11 355)
+    );
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 0.17 0.02 195;
+    --foreground: 0.94 0.012 85;
+    --card: 0.21 0.024 195;
+    --card-foreground: 0.94 0.012 85;
+    --popover: 0.21 0.024 195;
+    --popover-foreground: 0.94 0.012 85;
+
+    --primary: 0.72 0.1 185;
+    --primary-foreground: 0.17 0.02 195;
+
+    --secondary: 0.26 0.028 195;
+    --secondary-foreground: 0.88 0.012 85;
+
+    --muted: 0.26 0.028 195;
+    --muted-foreground: 0.68 0.016 90;
+
+    --accent: 0.72 0.12 340;
+    --accent-foreground: 0.17 0.02 340;
+
+    --destructive: 0.62 0.17 28;
+    --destructive-foreground: 0.17 0.02 28;
+
+    --success: 0.68 0.12 160;
+    --success-foreground: 0.17 0.02 160;
+    --warning: 0.78 0.13 80;
+    --warning-foreground: 0.19 0.03 80;
+
+    --border: 0.3 0.028 195;
+    --input: 0.3 0.028 195;
+    --ring: 0.72 0.12 340;
+
+    --chart-1: 0.72 0.1 185;
+    --chart-2: 0.72 0.12 340;
+    --chart-3: 0.7 0.12 160;
+    --chart-4: 0.78 0.13 80;
+    --chart-5: 0.68 0.13 30;
+
+    --sidebar: 0.21 0.024 195;
+    --sidebar-foreground: 0.94 0.012 85;
+    --sidebar-primary: 0.72 0.1 185;
+    --sidebar-primary-foreground: 0.17 0.02 195;
+    --sidebar-accent: 0.26 0.028 195;
+    --sidebar-accent-foreground: 0.88 0.012 85;
+    --sidebar-border: 0.3 0.028 195;
+    --sidebar-ring: 0.72 0.12 340;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.72 0.1 185),
+      oklch(0.6 0.09 195)
+    );
+    --gradient-warm: linear-gradient(
+      135deg,
+      oklch(0.21 0.024 195),
+      oklch(0.24 0.03 200)
+    );
+    --gradient-accent: linear-gradient(
+      135deg,
+      oklch(0.72 0.12 340),
+      oklch(0.62 0.12 350)
+    );
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    font-feature-settings: "cv11", "ss01";
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+    font-variation-settings: "SOFT" 40, "WONK" 1;
+  }
+  :focus-visible {
+    outline: 2px solid oklch(var(--ring));
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  ::selection {
+    background: oklch(var(--accent) / 0.22);
+    color: oklch(var(--foreground));
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  .text-gradient-primary {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .text-gradient-accent {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-gradient-primary {
+    background: var(--gradient-primary);
+  }
+  .bg-gradient-warm {
+    background: var(--gradient-warm);
+  }
+  .bg-gradient-accent {
+    background: var(--gradient-accent);
+  }
+  .shadow-subtle {
+    box-shadow: 0 1px 2px oklch(0.25 0.03 65 / 0.04), 0 4px 12px
+      oklch(0.25 0.03 65 / 0.05);
+  }
+  .shadow-elevated {
+    box-shadow: 0 2px 4px oklch(0.25 0.03 65 / 0.05), 0 12px 32px
+      oklch(0.25 0.03 65 / 0.09);
+  }
+  .grain {
+    background-image: radial-gradient(
+      oklch(0.25 0.03 65 / 0.035) 1px,
+      transparent 1px
+    );
+    background-size: 18px 18px;
+  }
+  .section-rule {
+    background: linear-gradient(
+      to right,
+      transparent,
+      oklch(var(--border)),
+      transparent
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

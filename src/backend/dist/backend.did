@@ -1,0 +1,181 @@
+type WhyThisMatters = 
+ record {
+   heading: text;
+   paragraphs: vec text;
+ };
+type Value = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "nat": nat;
+   "null";
+   "text": text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type Source = 
+ record {
+   organisation: text;
+   title: text;
+   url: text;
+ };
+type Slug = text;
+type SiteContent = 
+ record {
+   contactDetails: ContactDetails;
+   introduction: text;
+   siteName: text;
+   tagline: text;
+   whyThisMatters: WhyThisMatters;
+ };
+type Result__1 = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Result = 
+ record {
+   hasMore: bool;
+   rows: vec vec Cell;
+ };
+type RealLifeExample = 
+ record {
+   category: Category;
+   id: nat;
+   impact: text;
+   journey: text;
+   person: text;
+   problem: text;
+   situation: text;
+   source: Source;
+ };
+type Problem = 
+ record {
+   category: Category;
+   heroImage: text;
+   id: nat;
+   sections: vec ArticleSection;
+   slug: Slug;
+   sources: vec Source;
+   summary: text;
+   title: text;
+ };
+type FeaturedIssue = 
+ record {
+   category: Category;
+   heroImage: text;
+   slug: Slug;
+   summary: text;
+   title: text;
+ };
+type Error = 
+ variant {
+   AmbiguousAttribute: record {
+                         field: text;
+                         sources: vec text;
+                       };
+   FrontendOriginMismatch: record {
+                             expected: vec text;
+                             got: text;
+                           };
+   FrontendOriginsNotConfigured;
+   MalformedCandid;
+   MissingField: text;
+   MixedSsoSources: record {
+                      otherKeys: vec text;
+                      ssoKeys: vec text;
+                    };
+   NoAttributes;
+   Stale: record {ageNs: nat;};
+   UnknownNonce;
+   UntrustedSsoSource: record {domain: text;};
+ };
+type ContactResult = 
+ variant {
+   err: ContactError;
+   ok: record {id: nat;};
+ };
+type ContactError = 
+ variant {
+   invalidEmail;
+   missingEmail;
+   missingMessage;
+   missingName;
+ };
+type ContactDetails = 
+ record {
+   createdBy: text;
+   email: text;
+   location: text;
+   organisation: text;
+   project: text;
+ };
+type ChatResult = 
+ variant {
+   err: ChatError;
+   ok: text;
+ };
+type ChatMessage = 
+ record {
+   content: text;
+   role: variant {
+           assistant;
+           user;
+         };
+ };
+type ChatError = 
+ variant {
+   emptyQuestion;
+   unavailable: text;
+ };
+type Cell = 
+ record {
+   name: text;
+   value: Value;
+ };
+type Category = 
+ variant {
+   mental;
+   physical;
+ };
+type ArticleSection = 
+ record {
+   body: text;
+   heading: text;
+ };
+service : {
+  _initialize_access_control: () -> ();
+  _internet_identity_sign_in_finish: () -> (Result__1);
+  _internet_identity_sign_in_start: () -> (blob);
+  /// Educational AI Helper reply for a category, grounded in site content.
+  askHelper: (category: Category, question: text, history:
+   vec ChatMessage) -> (ChatResult);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  execute: (qJson: text) -> (Result) query;
+  /// Static Markdown documentation of the backend's public API.
+  getApiDoc: () -> (text) query;
+  getCallerUserRole: () -> (UserRole) query;
+  /// A single problem by its stable slug.
+  getProblem: (slug: Slug) -> (opt Problem) query;
+  /// Static site content: story and contact placeholders.
+  getSiteContent: () -> (SiteContent) query;
+  isCallerAdmin: () -> (bool) query;
+  /// Real-life examples for a category.
+  listExamples: (category: Category) -> (vec RealLifeExample) query;
+  /// Homepage featured-issue strip.
+  listFeaturedIssues: () -> (vec FeaturedIssue) query;
+  /// Full problem catalogue, optionally filtered by category.
+  listProblems: (category: opt Category) -> (vec Problem) query;
+  schema: () -> (text) query;
+  /// Free-text search across both Physical and Mental Wellbeing problems.
+  searchProblems: (term: text) -> (vec Problem) query;
+  /// Validate and store a contact-form submission, then deliver it by email to
+  /// the site owner. Email delivery is best-effort: a delivery failure never
+  /// discards an already-stored submission.
+  submitContact: (name: text, email: text, message: text) -> (ContactResult);
+}
